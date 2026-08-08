@@ -1,0 +1,16 @@
+{
+  "name": "auravive",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd frontend/auravive_client && npm start",
+    "server": "cd backend && python manage.py runserver",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-client": "cd frontend/auravive_client && npm install",
+    "install-server": "cd backend && pip install -r requirements.txt",
+    "migrate": "cd backend && python manage.py migrate",
+    "superuser": "cd backend && python manage.py createsuperuser"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
