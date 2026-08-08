@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 from datetime import timedelta
@@ -7,7 +6,6 @@ import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
-
 
 # ============================================================
 # BASE DIRECTORY
@@ -22,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv(
     "SECRET_KEY",
-    "django-insecure-default-key-for-development-only"
+    "django-insecure-default-key-for-development-only",
 )
 
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
@@ -31,7 +29,7 @@ ALLOWED_HOSTS = [
     host.strip()
     for host in os.getenv(
         "ALLOWED_HOSTS",
-        "localhost,127.0.0.1"
+        "localhost,127.0.0.1,auravive-p1cr.onrender.com",
     ).split(",")
     if host.strip()
 ]
@@ -86,13 +84,23 @@ MIDDLEWARE = [
 # ============================================================
 
 CORS_ALLOWED_ORIGINS = [
-    origin.strip()
-    for origin in os.getenv(
-        "CORS_ALLOWED_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000"
-    ).split(",")
-    if origin.strip()
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://auravive1.onrender.com",
 ]
+
+# Also allow additional origins from Render environment variables
+extra_cors_origins = os.getenv("CORS_ALLOWED_ORIGINS", "")
+
+if extra_cors_origins:
+    CORS_ALLOWED_ORIGINS.extend(
+        origin.strip()
+        for origin in extra_cors_origins.split(",")
+        if origin.strip()
+    )
+
+# Remove duplicates
+CORS_ALLOWED_ORIGINS = list(set(CORS_ALLOWED_ORIGINS))
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -102,13 +110,23 @@ CORS_ALLOW_CREDENTIALS = True
 # ============================================================
 
 CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in os.getenv(
-        "CSRF_TRUSTED_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000"
-    ).split(",")
-    if origin.strip()
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://auravive1.onrender.com",
 ]
+
+# Also allow additional origins from Render environment variables
+extra_csrf_origins = os.getenv("CSRF_TRUSTED_ORIGINS", "")
+
+if extra_csrf_origins:
+    CSRF_TRUSTED_ORIGINS.extend(
+        origin.strip()
+        for origin in extra_csrf_origins.split(",")
+        if origin.strip()
+    )
+
+# Remove duplicates
+CSRF_TRUSTED_ORIGINS = list(set(CSRF_TRUSTED_ORIGINS))
 
 
 # ============================================================
