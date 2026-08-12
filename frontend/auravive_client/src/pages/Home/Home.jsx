@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import {
   SparklesIcon,
   ChatBubbleLeftIcon,
@@ -15,70 +14,67 @@ import {
   StarIcon,
   ShieldCheckIcon,
   ClockIcon,
+  RocketLaunchIcon,
+  GlobeAltIcon,
+  LightBulbIcon,
+  UserGroupIcon,
+  DocumentTextIcon,
+  VideoCameraIcon,
+  MusicalNoteIcon,
 } from '@heroicons/react/24/outline';
-import AnimatedCards from '../../components/Animations/AnimatedCards';
-import AnimatedButton from '../../components/Animations/AnimatedButton';
-import { floatAnimation, pulseAnimation } from '../../utils/animations';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [showFullAbout, setShowFullAbout] = useState(false);
 
   const features = [
     {
       icon: ChatBubbleLeftIcon,
       title: 'AI Companion',
       description: '24/7 emotional wellness support powered by AI. Chat safely and get personalized guidance.',
-      color: 'bg-blue-100 text-blue-600',
-      delay: 0.1,
+      color: 'from-blue-500 to-blue-600',
     },
     {
       icon: BookOpenIcon,
       title: 'Journal & Memories',
       description: 'Capture your thoughts, feelings, and experiences in a private, secure journal.',
-      color: 'bg-purple-100 text-purple-600',
-      delay: 0.15,
+      color: 'from-purple-500 to-purple-600',
     },
     {
       icon: ChartBarIcon,
       title: 'Mood Tracking',
       description: 'Track, analyze, and understand your emotional patterns over time.',
-      color: 'bg-green-100 text-green-600',
-      delay: 0.2,
+      color: 'from-green-500 to-green-600',
     },
     {
       icon: SparklesIcon,
       title: 'Mindfulness Activities',
       description: 'Guided meditation, breathing exercises, and relaxation techniques.',
-      color: 'bg-orange-100 text-orange-600',
-      delay: 0.25,
+      color: 'from-orange-500 to-orange-600',
     },
     {
       icon: HeartIcon,
       title: 'Mental Health Resources',
       description: 'Curated articles, videos, books, and healing content.',
-      color: 'bg-red-100 text-red-600',
-      delay: 0.3,
+      color: 'from-red-500 to-red-600',
     },
     {
       icon: AcademicCapIcon,
       title: 'Online Courses',
       description: 'Learn and grow with expert-led wellness courses.',
-      color: 'bg-yellow-100 text-yellow-600',
-      delay: 0.35,
+      color: 'from-yellow-500 to-yellow-600',
     },
     {
       icon: UsersIcon,
       title: 'Community Support',
       description: 'Connect with others, share experiences, and find support circles.',
-      color: 'bg-pink-100 text-pink-600',
-      delay: 0.4,
+      color: 'from-pink-500 to-pink-600',
     },
     {
       icon: LifebuoyIcon,
       title: 'Get Help',
       description: 'Find trusted organizations and professional support services.',
-      color: 'bg-indigo-100 text-indigo-600',
-      delay: 0.45,
+      color: 'from-indigo-500 to-indigo-600',
     },
   ];
 
@@ -89,7 +85,6 @@ const Home = () => {
       content: 'Auravive has been a game-changer for my mental health. The AI companion is incredibly supportive, and the community is so welcoming.',
       avatar: '👩',
       rating: 5,
-      delay: 0.1,
     },
     {
       name: 'James K.',
@@ -97,7 +92,6 @@ const Home = () => {
       content: 'The mood tracking feature has helped me understand my emotional patterns better. I feel more in control of my mental health.',
       avatar: '👨',
       rating: 5,
-      delay: 0.2,
     },
     {
       name: 'Emily R.',
@@ -105,99 +99,66 @@ const Home = () => {
       content: 'The mindfulness activities and courses have transformed my daily routine. I\'m more present and less anxious.',
       avatar: '👩‍🦰',
       rating: 5,
-      delay: 0.3,
     },
   ];
 
   const stats = [
-    { label: 'Active Users', value: '10K+', icon: UsersIcon, delay: 0.1 },
-    { label: 'Moods Tracked', value: '50K+', icon: ChartBarIcon, delay: 0.2 },
-    { label: 'Community Posts', value: '5K+', icon: HeartIcon, delay: 0.3 },
-    { label: 'Courses Completed', value: '2K+', icon: CheckCircleIcon, delay: 0.4 },
+    { label: 'Active Users', value: '10K+', icon: UsersIcon },
+    { label: 'Moods Tracked', value: '50K+', icon: ChartBarIcon },
+    { label: 'Community Posts', value: '5K+', icon: HeartIcon },
+    { label: 'Courses Completed', value: '2K+', icon: CheckCircleIcon },
+  ];
+
+  const coreFeatures = [
+    { icon: '🤖', title: 'AI Emotional Support', description: '24/7 AI-powered conversations for emotional wellness' },
+    { icon: '📊', title: 'Mood Tracking', description: 'Monitor and understand your emotional patterns' },
+    { icon: '🧘', title: 'Mindfulness Activities', description: 'Guided meditation and relaxation exercises' },
+    { icon: '📝', title: 'Personal Journaling', description: 'Private space to express your thoughts and feelings' },
+    { icon: '📚', title: 'Mental Health Resources', description: 'Curated articles, videos, and healing content' },
+    { icon: '🎓', title: 'Online Courses', description: 'Expert-led courses for personal growth' },
+    { icon: '👥', title: 'Community Support Groups', description: 'Connect with others on similar journeys' },
+    { icon: '🆘', title: 'Professional Help', description: 'Connections to trusted mental health professionals' },
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen"
-    >
+    <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-20 px-4 overflow-hidden">
-        {/* Animated background elements */}
-        <motion.div
-          className="absolute top-20 right-20 w-64 h-64 bg-indigo-200 rounded-full opacity-20"
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-20 w-48 h-48 bg-purple-200 rounded-full opacity-20"
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-
+        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl -mr-48 -mt-48"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl -ml-48 -mb-48"></div>
+        
         <div className="max-w-7xl mx-auto relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <motion.div
-                className="inline-flex items-center bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium mb-6"
-                animate={pulseAnimation.animate}
-              >
+            <div>
+              <div className="inline-flex items-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-lg shadow-indigo-200">
                 <SparklesIcon className="w-4 h-4 mr-2" />
                 Your Mental Wellness Companion
-              </motion.div>
+              </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Nurture Your Mind,
                 <br />
-                <span className="text-indigo-600">Thrive in Life</span>
+                <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Thrive in Life</span>
               </h1>
               <p className="mt-6 text-lg text-gray-600 max-w-xl">
                 Auravive is your all-in-one platform for mental wellness, mindfulness, 
                 and personal growth. Start your journey to better mental health today.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <AnimatedButton
+                <button
                   onClick={() => navigate('/register')}
-                  className="px-8 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center"
+                  className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg shadow-indigo-200 flex items-center"
                 >
                   Get Started Free
                   <ArrowRightIcon className="w-4 h-4 ml-2" />
-                </AnimatedButton>
-                <AnimatedButton
-                  onClick={() => navigate('/about')}
-                  className="px-8 py-3 bg-white text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors border border-gray-200"
+                </button>
+                <button
+                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-8 py-3 bg-white text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors border border-gray-200 shadow-sm"
                 >
                   Learn More
-                </AnimatedButton>
+                </button>
               </div>
-              <motion.div
-                className="mt-8 flex items-center space-x-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
+              <div className="mt-8 flex flex-wrap items-center gap-6">
                 <div className="flex items-center space-x-1">
                   <ShieldCheckIcon className="w-5 h-5 text-green-500" />
                   <span className="text-sm text-gray-600">100% Private</span>
@@ -210,40 +171,15 @@ const Home = () => {
                   <StarIcon className="w-5 h-5 text-yellow-500" />
                   <span className="text-sm text-gray-600">Expert Curated</span>
                 </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Hero Image/Animation */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative hidden lg:block"
-            >
-              <motion.div
-                className="relative bg-white rounded-2xl shadow-2xl p-6 border border-gray-100"
-                animate={floatAnimation.animate}
-              >
-                <motion.div
-                  className="absolute -top-4 -right-4 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg"
-                  animate={pulseAnimation.animate}
-                >
+              </div>
+            </div>
+            <div className="relative hidden lg:block">
+              <div className="relative bg-white rounded-2xl shadow-2xl p-6 border border-gray-100">
+                <div className="absolute -top-4 -right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                   🌟 Trusted by 10K+
-                </motion.div>
+                </div>
                 <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-8 text-center">
-                  <motion.div
-                    className="text-6xl mb-4"
-                    animate={{
-                      rotate: [0, 10, -10, 0],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    🧠
-                  </motion.div>
+                  <div className="text-6xl mb-4">🧠</div>
                   <h3 className="text-xl font-semibold text-gray-900">Start Your Wellness Journey</h3>
                   <p className="text-gray-600 mt-2">Join thousands of users who are transforming their mental health</p>
                   <div className="mt-6 flex justify-center space-x-4 text-sm text-gray-500">
@@ -252,35 +188,118 @@ const Home = () => {
                     <span>✅ Community support</span>
                   </div>
                 </div>
-                <div className="mt-6 grid grid-cols-4 gap-4 text-center">
-                  {stats.map((stat, index) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 + (index * 0.1) }}
-                    >
-                      <p className="text-2xl font-bold text-indigo-600">{stat.value}</p>
+                <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+                  {stats.map((stat) => (
+                    <div key={stat.label}>
+                      <p className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{stat.value}</p>
                       <p className="text-xs text-gray-500">{stat.label}</p>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About / Learn More Section */}
+      <section id="about" className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
+              About Auravive
+            </span>
+            <h2 className="text-3xl font-bold text-gray-900">Learn More About Our Platform</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mt-4 rounded-full"></div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 border border-indigo-100">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">What is Auravive?</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Auravive is a mental wellness platform designed to help people improve their emotional well-being 
+                  through self-reflection, mindfulness, community support, learning, and access to professional resources. 
+                  The platform creates a safe space where people can manage stress, understand their emotions, track 
+                  their mental wellness journey, and find support when they need it.
+                </p>
+              </div>
+
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
+                  <div className="text-3xl mb-2">🎯</div>
+                  <h4 className="font-semibold text-gray-900">Our Mission</h4>
+                  <p className="text-sm text-gray-600 mt-1">
+                    To make emotional wellness support more accessible by helping people heal, grow, and build 
+                    healthier minds through technology, resources, and supportive communities.
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-100">
+                  <div className="text-3xl mb-2">👁️</div>
+                  <h4 className="font-semibold text-gray-900">Our Vision</h4>
+                  <p className="text-sm text-gray-600 mt-1">
+                    To become a trusted global platform where every person can access tools, guidance, and a 
+                    supportive environment to improve their mental health and live a more balanced and fulfilling life.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Core Features</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {coreFeatures.map((feature, index) => (
+                  <div key={index} className="bg-gray-50 rounded-xl p-4 hover:bg-white hover:shadow-md transition-all border border-gray-100">
+                    <div className="text-2xl mb-1">{feature.icon}</div>
+                    <h4 className="font-medium text-gray-900 text-sm">{feature.title}</h4>
+                    <p className="text-xs text-gray-500 mt-1">{feature.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Values Section */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <HeartIcon className="w-7 h-7 text-indigo-600" />
+              </div>
+              <h4 className="font-semibold text-gray-900">Compassion</h4>
+              <p className="text-sm text-gray-500 mt-1">Empathy at the core of everything we do</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-r from-green-100 to-teal-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <ShieldCheckIcon className="w-7 h-7 text-green-600" />
+              </div>
+              <h4 className="font-semibold text-gray-900">Privacy</h4>
+              <p className="text-sm text-gray-500 mt-1">Your data is always protected</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <UsersIcon className="w-7 h-7 text-yellow-600" />
+              </div>
+              <h4 className="font-semibold text-gray-900">Inclusivity</h4>
+              <p className="text-sm text-gray-500 mt-1">For everyone, everywhere</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <LightBulbIcon className="w-7 h-7 text-purple-600" />
+              </div>
+              <h4 className="font-semibold text-gray-900">Innovation</h4>
+              <p className="text-sm text-gray-500 mt-1">Evidence-based practices</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
+            <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
+              Features
+            </span>
             <h2 className="text-3xl font-bold text-gray-900">
               Everything You Need for Mental Wellness
             </h2>
@@ -288,42 +307,34 @@ const Home = () => {
               A comprehensive platform designed to support your mental health journey
               with tools, resources, and community.
             </p>
-          </motion.div>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <AnimatedCards
+              <div
                 key={index}
-                delay={feature.delay}
-                className="group bg-gray-50 rounded-xl p-6 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-indigo-200"
+                className="group bg-white rounded-xl p-6 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-transparent hover:-translate-y-1"
               >
-                <motion.div
-                  className={`w-12 h-12 rounded-full ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
-                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <feature.icon className="w-6 h-6" />
-                </motion.div>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                  <feature.icon className="w-6 h-6 text-white" />
+                </div>
                 <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-600">{feature.description}</p>
-              </AnimatedCards>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4 bg-gradient-to-b from-indigo-50 to-white">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
+            <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
+              Getting Started
+            </span>
             <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
             <p className="mt-4 text-gray-600">Start your wellness journey in three simple steps</p>
-          </motion.div>
+          </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -331,72 +342,55 @@ const Home = () => {
                 title: 'Create Your Account',
                 description: 'Sign up for free and set up your wellness profile.',
                 icon: '📝',
-                delay: 0.1,
+                color: 'from-blue-500 to-blue-600',
               },
               {
                 step: '2',
                 title: 'Explore & Connect',
                 description: 'Use tools, join communities, and track your progress.',
                 icon: '🔍',
-                delay: 0.2,
+                color: 'from-purple-500 to-purple-600',
               },
               {
                 step: '3',
                 title: 'Grow & Thrive',
                 description: 'Develop healthy habits and improve your mental wellbeing.',
                 icon: '🌱',
-                delay: 0.3,
+                color: 'from-green-500 to-green-600',
               },
             ].map((item) => (
-              <AnimatedCards key={item.step} delay={item.delay} className="text-center">
-                <motion.div
-                  className="relative inline-block"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+              <div key={item.step} className="text-center group">
+                <div className="relative inline-block">
+                  <div className={`w-24 h-24 bg-gradient-to-r ${item.color} rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
                     {item.icon}
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
                     {item.step}
                   </div>
-                </motion.div>
+                </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-600">{item.description}</p>
-              </AnimatedCards>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
+            <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
+              Testimonials
+            </span>
             <h2 className="text-3xl font-bold text-gray-900">What Our Users Say</h2>
             <p className="mt-4 text-gray-600">Real stories from real people on their wellness journey</p>
-          </motion.div>
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
-              <AnimatedCards
-                key={index}
-                delay={testimonial.delay}
-                className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-shadow"
-              >
+              <div key={index} className="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-center space-x-3 mb-4">
-                  <motion.div
-                    className="text-3xl"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {testimonial.avatar}
-                  </motion.div>
+                  <div className="text-3xl">{testimonial.avatar}</div>
                   <div>
                     <p className="font-medium text-gray-900">{testimonial.name}</p>
                     <p className="text-sm text-gray-500">{testimonial.role}</p>
@@ -404,92 +398,43 @@ const Home = () => {
                 </div>
                 <div className="flex text-yellow-400 mb-3">
                   {[...Array(5)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.1 * i }}
-                    >
-                      <StarIcon className="w-4 h-4 fill-current" />
-                    </motion.div>
+                    <StarIcon key={i} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-600 text-sm">{testimonial.content}</p>
-              </AnimatedCards>
+                <p className="text-gray-600 text-sm leading-relaxed">{testimonial.content}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 overflow-hidden relative">
-        <motion.div
-          className="absolute inset-0 opacity-10"
-          style={{
-            background: "radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)",
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <div className="max-w-4xl mx-auto text-center text-white relative">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-3xl font-bold mb-4"
-          >
-            Ready to Start Your Journey?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-indigo-100 text-lg mb-8"
-          >
+      <section className="py-20 px-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+        <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="text-6xl mb-4">🚀</div>
+          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+          <p className="text-indigo-100 text-lg mb-8">
             Join thousands of users who are taking control of their mental health.
             Start for free today.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <AnimatedButton
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button
               onClick={() => navigate('/register')}
-              className="px-8 py-3 bg-white text-indigo-600 rounded-lg font-medium hover:bg-indigo-50 transition-colors"
+              className="px-8 py-3 bg-white text-indigo-600 rounded-lg font-medium hover:bg-indigo-50 transition-colors shadow-lg"
             >
               Start Free Trial
-            </AnimatedButton>
-            <AnimatedButton
+            </button>
+            <button
               onClick={() => navigate('/pricing')}
-              className="px-8 py-3 bg-indigo-500 text-white rounded-lg font-medium hover:bg-indigo-400 transition-colors border border-white/20"
+              className="px-8 py-3 bg-white/20 text-white rounded-lg font-medium hover:bg-white/30 transition-colors border border-white/30 backdrop-blur-sm"
             >
               View Pricing
-            </AnimatedButton>
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="mt-6 text-indigo-200 text-sm"
-          >
-            No credit card required • Free plan available
-          </motion.p>
+            </button>
+          </div>
+          <p className="mt-6 text-indigo-200 text-sm">No credit card required • Free plan available</p>
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 };
 
