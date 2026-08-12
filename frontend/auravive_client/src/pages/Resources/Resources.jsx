@@ -12,18 +12,23 @@ import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
   StarIcon,
+  SparklesIcon,
+  DocumentTextIcon,
+  MicrophoneIcon,
+  FilmIcon,
+  PencilIcon,
 } from '@heroicons/react/24/outline';
 import ResourceCard from './components/ResourceCard';
 import ResourceDetail from './components/ResourceDetail';
 
 const CATEGORIES = [
-  { id: 'guides', label: 'Mental Health Guides', icon: '📚' },
-  { id: 'stories', label: 'Inspiring Stories', icon: '📖' },
-  { id: 'spoken_word', label: 'Spoken Word', icon: '🎤' },
-  { id: 'poems', label: 'Poems', icon: '📝' },
-  { id: 'music', label: 'Healing Music', icon: '🎵' },
-  { id: 'videos', label: 'Wellness Videos', icon: '🎬' },
-  { id: 'books', label: 'Books', icon: '📕' },
+  { id: 'guides', label: 'Mental Health Guides', icon: '📚', color: 'from-blue-500 to-blue-600' },
+  { id: 'stories', label: 'Inspiring Stories', icon: '📖', color: 'from-green-500 to-green-600' },
+  { id: 'spoken_word', label: 'Spoken Word', icon: '🎤', color: 'from-purple-500 to-purple-600' },
+  { id: 'poems', label: 'Poems', icon: '📝', color: 'from-pink-500 to-pink-600' },
+  { id: 'music', label: 'Healing Music', icon: '🎵', color: 'from-indigo-500 to-indigo-600' },
+  { id: 'videos', label: 'Wellness Videos', icon: '🎬', color: 'from-red-500 to-red-600' },
+  { id: 'books', label: 'Books', icon: '📕', color: 'from-orange-500 to-orange-600' },
 ];
 
 const Resources = () => {
@@ -34,7 +39,7 @@ const Resources = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedResource, setSelectedResource] = useState(null);
-  const [view, setView] = useState('grid'); // 'grid' | 'list'
+  const [view, setView] = useState('grid');
 
   useEffect(() => {
     fetchData();
@@ -84,50 +89,69 @@ const Resources = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <ArrowPathIcon className="w-12 h-12 text-indigo-600 animate-spin" />
+        <div className="text-center">
+          <ArrowPathIcon className="w-12 h-12 text-indigo-600 animate-spin mx-auto" />
+          <p className="mt-4 text-gray-500">Loading resources...</p>
+        </div>
       </div>
     );
   }
 
+  const hasResources = resources.length > 0;
+
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Mental Health Resources</h1>
-        <p className="text-gray-500">Articles, videos, books & helpful resources</p>
+    <div className="max-w-7xl mx-auto space-y-8">
+      {/* Header with gradient */}
+      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl p-8 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Mental Health Resources</h1>
+            <p className="text-indigo-100 mt-1">Articles, videos, books & helpful resources</p>
+          </div>
+          <div className="hidden md:block">
+            <SparklesIcon className="w-12 h-12 text-white/30" />
+          </div>
+        </div>
+        {/* Search Bar in Header */}
+        <div className="relative mt-4">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search resources..."
+            className="w-full px-4 py-3 pl-12 bg-white/20 backdrop-blur-sm text-white placeholder-white/70 rounded-lg focus:ring-2 focus:ring-white/50 focus:outline-none border border-white/20"
+          />
+          <MagnifyingGlassIcon className="absolute left-4 top-3.5 w-5 h-5 text-white/70" />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="absolute right-4 top-3.5 text-white/70 hover:text-white"
+            >
+              <XMarkIcon className="w-5 h-5" />
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* Search */}
-      <div className="relative">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search resources..."
-          className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-        />
-        <MagnifyingGlassIcon className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-      </div>
-
-      {/* Categories */}
-      <div className="flex flex-wrap gap-2">
+      {/* Category Pills */}
+      <div className="flex flex-wrap gap-2 pb-2 overflow-x-auto">
         <button
           onClick={() => setSelectedCategory('all')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
             selectedCategory === 'all'
-              ? 'bg-indigo-600 text-white'
+              ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >
-          All Resources
+          ✨ All Resources
         </button>
         {CATEGORIES.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
               selectedCategory === cat.id
-                ? 'bg-indigo-600 text-white'
+                ? `bg-gradient-to-r ${cat.color} text-white shadow-lg`
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
@@ -137,47 +161,53 @@ const Resources = () => {
         ))}
       </div>
 
-      {/* View Toggle */}
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">{resources.length} resources found</p>
-        <div className="flex space-x-2">
-          <button
-            onClick={() => setView('grid')}
-            className={`p-2 rounded-lg transition-colors ${
-              view === 'grid' ? 'bg-indigo-100 text-indigo-600' : 'text-gray-400 hover:text-gray-600'
-            }`}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-            </svg>
-          </button>
-          <button
-            onClick={() => setView('list')}
-            className={`p-2 rounded-lg transition-colors ${
-              view === 'list' ? 'bg-indigo-100 text-indigo-600' : 'text-gray-400 hover:text-gray-600'
-            }`}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+      {/* Stats Bar */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <p className="text-sm text-gray-500">Total Resources</p>
+          <p className="text-2xl font-bold text-gray-900">{resources.length}</p>
+        </div>
+        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <p className="text-sm text-gray-500">Categories</p>
+          <p className="text-2xl font-bold text-gray-900">{CATEGORIES.length}</p>
+        </div>
+        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <p className="text-sm text-gray-500">Premium Content</p>
+          <p className="text-2xl font-bold text-yellow-600">
+            {resources.filter(r => r.is_premium).length}
+          </p>
+        </div>
+        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <p className="text-sm text-gray-500">Free Content</p>
+          <p className="text-2xl font-bold text-green-600">
+            {resources.filter(r => !r.is_premium).length}
+          </p>
         </div>
       </div>
 
       {/* Resources Grid */}
-      <div className={`grid ${
-        view === 'grid' 
-          ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-          : 'grid-cols-1'
-      } gap-6`}>
-        {resources.length === 0 ? (
-          <div className="col-span-full text-center py-12 bg-white rounded-xl border border-gray-200">
-            <BookOpenIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No resources found</h3>
+      {!hasResources ? (
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="max-w-md mx-auto">
+            <div className="w-24 h-24 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <BookOpenIcon className="w-12 h-12 text-indigo-400" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No resources found</h3>
             <p className="text-gray-500">Try adjusting your search or filters</p>
+            <button
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedCategory('all');
+              }}
+              className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            >
+              Clear Filters
+            </button>
           </div>
-        ) : (
-          resources.map((resource) => (
+        </div>
+      ) : (
+        <div className={`grid ${view === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'} gap-6`}>
+          {resources.map((resource) => (
             <ResourceCard
               key={resource.id}
               resource={resource}
@@ -187,9 +217,9 @@ const Resources = () => {
               onView={() => setSelectedResource(resource)}
               onPurchase={() => handleBookPurchase(resource)}
             />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Resource Detail Modal */}
       {selectedResource && (
@@ -202,5 +232,12 @@ const Resources = () => {
     </div>
   );
 };
+
+// Add XMarkIcon import
+const XMarkIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
 
 export default Resources;
