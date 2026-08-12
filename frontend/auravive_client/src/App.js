@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Layout
 import Layout from './components/Layout/Layout';
+import PublicLayout from './components/Layout/PublicLayout';
 import PrivateRoute from './components/Auth/PrivateRoute';
 
 // Pages
@@ -14,6 +15,8 @@ import Register from './pages/Auth/Register';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import Profile from './pages/Profile/Profile';
 import Pricing from './pages/Pricing/Pricing';
+import Terms from './pages/Terms/Terms';
+import Privacy from './pages/Privacy/Privacy';
 import Dashboard from './pages/Dashboard/Dashboard';
 import AIChat from './pages/AIChat/AIChat';
 import Journey from './pages/Journey/Journey';
@@ -23,159 +26,78 @@ import Resources from './pages/Resources/Resources';
 import Courses from './pages/Courses/Courses';
 import Community from './pages/Community/Community';
 import GetHelp from './pages/GetHelp/GetHelp';
-import AnimatedPage from './components/Animations/AnimatedPage';
-
-// Wrapper component for animated routes
-const AnimatedRoute = ({ children }) => {
-  const location = useLocation();
-  return (
-    <AnimatePresence mode="wait">
-      <AnimatedPage key={location.pathname}>
-        {children}
-      </AnimatedPage>
-    </AnimatePresence>
-  );
-};
 
 function App() {
   return (
     <Router>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-          },
-        }}
-      />
-      <Routes>
-        {/* Public Routes */}
-        <Route element={<Layout />}>
-          <Route path="/" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/login" element={
-            <AnimatedRoute>
-              <Login />
-            </AnimatedRoute>
-          } />
-          <Route path="/register" element={
-            <AnimatedRoute>
-              <Register />
-            </AnimatedRoute>
-          } />
-          <Route path="/forgot-password" element={
-            <AnimatedRoute>
-              <ForgotPassword />
-            </AnimatedRoute>
-          } />
-          <Route path="/pricing" element={
-            <AnimatedRoute>
-              <Pricing />
-            </AnimatedRoute>
-          } />
-          <Route path="/about" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/services" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/faq" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/contact" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/donate" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/privacy" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/terms" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-          <Route path="/cookies" element={
-            <AnimatedRoute>
-              <Home />
-            </AnimatedRoute>
-          } />
-        </Route>
-        
-        {/* Protected Routes */}
-        <Route element={<PrivateRoute />}>
-          <Route element={<Layout />}>
-            <Route path="/dashboard" element={
-              <AnimatedRoute>
-                <Dashboard />
-              </AnimatedRoute>
-            } />
-            <Route path="/profile" element={
-              <AnimatedRoute>
-                <Profile />
-              </AnimatedRoute>
-            } />
-            <Route path="/ai-companion" element={
-              <AnimatedRoute>
-                <AIChat />
-              </AnimatedRoute>
-            } />
-            <Route path="/journey" element={
-              <AnimatedRoute>
-                <Journey />
-              </AnimatedRoute>
-            } />
-            <Route path="/mood-tracking" element={
-              <AnimatedRoute>
-                <MoodTracking />
-              </AnimatedRoute>
-            } />
-            <Route path="/mindfulness" element={
-              <AnimatedRoute>
-                <Mindfulness />
-              </AnimatedRoute>
-            } />
-            <Route path="/resources" element={
-              <AnimatedRoute>
-                <Resources />
-              </AnimatedRoute>
-            } />
-            <Route path="/courses" element={
-              <AnimatedRoute>
-                <Courses />
-              </AnimatedRoute>
-            } />
-            <Route path="/community" element={
-              <AnimatedRoute>
-                <Community />
-              </AnimatedRoute>
-            } />
-            <Route path="/get-help" element={
-              <AnimatedRoute>
-                <GetHelp />
-              </AnimatedRoute>
-            } />
-          </Route>
-        </Route>
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#1e293b',
+              color: '#f8fafc',
+              borderRadius: '12px',
+              padding: '16px',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+            },
+            success: {
+              icon: '🎉',
+              style: {
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+              },
+            },
+            error: {
+              icon: '😢',
+              style: {
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+              },
+            },
+          }}
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Routes>
+            {/* Public Routes */}
+            <Route element={<PublicLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/about" element={<Home />} />
+              <Route path="/services" element={<Home />} />
+              <Route path="/faq" element={<Home />} />
+              <Route path="/contact" element={<Home />} />
+              <Route path="/donate" element={<Home />} />
+              <Route path="/cookies" element={<Home />} />
+            </Route>
+            
+            {/* Protected Routes */}
+            <Route element={<PrivateRoute />}>
+              <Route element={<Layout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/ai-companion" element={<AIChat />} />
+                <Route path="/journey" element={<Journey />} />
+                <Route path="/mood-tracking" element={<MoodTracking />} />
+                <Route path="/mindfulness" element={<Mindfulness />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/get-help" element={<GetHelp />} />
+              </Route>
+            </Route>
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
     </Router>
   );
 }
