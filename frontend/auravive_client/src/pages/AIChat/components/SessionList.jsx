@@ -1,13 +1,16 @@
 import React from 'react';
-import { ChatBubbleLeftIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftIcon, TrashIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { formatDistanceToNow } from 'date-fns';
 
 const SessionList = ({ sessions, currentSession, onSelect, onDelete }) => {
   if (!sessions || sessions.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-400">
-        <ChatBubbleLeftIcon className="w-12 h-12 mx-auto mb-2 opacity-50" />
-        <p className="text-sm">No chats yet</p>
-        <p className="text-xs">Start a new conversation</p>
+      <div className="p-6 text-center">
+        <div className="w-16 h-16 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <ChatBubbleLeftIcon className="w-8 h-8 text-indigo-400" />
+        </div>
+        <p className="text-sm font-medium text-gray-900">No chats yet</p>
+        <p className="text-xs text-gray-400 mt-1">Start a new conversation</p>
       </div>
     );
   }
@@ -17,26 +20,29 @@ const SessionList = ({ sessions, currentSession, onSelect, onDelete }) => {
       {sessions.map((session) => (
         <div
           key={session.id}
-          className={`group flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
+          className={`group flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all ${
             currentSession?.id === session.id
-              ? 'bg-indigo-100 text-indigo-700'
+              ? 'bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 shadow-sm'
               : 'hover:bg-gray-100'
           }`}
           onClick={() => onSelect(session)}
         >
           <div className="flex items-center space-x-3 min-w-0">
-            <ChatBubbleLeftIcon className="w-4 h-4 flex-shrink-0" />
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+              currentSession?.id === session.id
+                ? 'bg-gradient-to-r from-indigo-500 to-purple-500'
+                : 'bg-gray-200'
+            }`}>
+              <ChatBubbleLeftIcon className={`w-4 h-4 ${
+                currentSession?.id === session.id ? 'text-white' : 'text-gray-500'
+              }`} />
+            </div>
             <div className="min-w-0">
-              <p className="text-sm font-medium truncate">
+              <p className="text-sm font-medium truncate text-gray-900">
                 {session.title || `Chat ${new Date(session.created_at).toLocaleDateString()}`}
               </p>
               <p className="text-xs text-gray-400">
-                {new Date(session.created_at).toLocaleString('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {formatDistanceToNow(new Date(session.created_at), { addSuffix: true })}
               </p>
             </div>
           </div>
