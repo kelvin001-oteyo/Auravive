@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Layout
 import Layout from './components/Layout/Layout';
-
 import PublicLayout from './components/Layout/PublicLayout';
 import PrivateRoute from './components/Auth/PrivateRoute';
 
@@ -64,7 +63,7 @@ function App() {
           transition={{ duration: 0.3 }}
         >
           <Routes>
-            {/* Public Routes */}
+            {/* Public Routes - No Auth Required */}
             <Route element={<PublicLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
@@ -81,7 +80,7 @@ function App() {
               <Route path="/cookies" element={<Home />} />
             </Route>
             
-            {/* Protected Routes */}
+            {/* Protected Routes - Auth Required */}
             <Route element={<PrivateRoute />}>
               <Route element={<Layout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
