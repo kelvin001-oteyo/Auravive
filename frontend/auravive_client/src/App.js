@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Layout
 import Layout from './components/Layout/Layout';
+
 import PublicLayout from './components/Layout/PublicLayout';
 import PrivateRoute from './components/Auth/PrivateRoute';
 
