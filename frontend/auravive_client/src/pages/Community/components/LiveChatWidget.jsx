@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { XMarkIcon, PaperAirplaneIcon, UserCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { 
+  XMarkIcon, 
+  PaperAirplaneIcon, 
+  UserCircleIcon, 
+  ClockIcon,
+  ChatBubbleLeftIcon  // ✅ This was missing
+} from '@heroicons/react/24/outline';
 
 const LiveChatWidget = ({ onClose }) => {
   const [messages, setMessages] = useState([
