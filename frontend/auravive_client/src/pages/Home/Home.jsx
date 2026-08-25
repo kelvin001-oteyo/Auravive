@@ -110,14 +110,14 @@ const Home = () => {
   ];
 
   const coreFeatures = [
-    { icon: '🤖', title: 'AI Emotional Support', description: '24/7 AI-powered conversations for emotional wellness' },
-    { icon: '📊', title: 'Mood Tracking', description: 'Monitor and understand your emotional patterns' },
-    { icon: '🧘', title: 'Mindfulness Activities', description: 'Guided meditation and relaxation exercises' },
-    { icon: '📝', title: 'Personal Journaling', description: 'Private space to express your thoughts and feelings' },
-    { icon: '📚', title: 'Mental Health Resources', description: 'Curated articles, videos, and healing content' },
-    { icon: '🎓', title: 'Online Courses', description: 'Expert-led courses for personal growth' },
-    { icon: '👥', title: 'Community Support Groups', description: 'Connect with others on similar journeys' },
-    { icon: '🆘', title: 'Professional Help', description: 'Connections to trusted mental health professionals' },
+    { icon: 'AI', title: 'AI Emotional Support', description: '24/7 AI-powered conversations for emotional wellness' },
+    { icon: 'MT', title: 'Mood Tracking', description: 'Monitor and understand your emotional patterns' },
+    { icon: 'MA', title: 'Mindfulness Activities', description: 'Guided meditation and relaxation exercises' },
+    { icon: 'PJ', title: 'Personal Journaling', description: 'Private space to express your thoughts and feelings' },
+    { icon: 'MR', title: 'Mental Health Resources', description: 'Curated articles, videos, and healing content' },
+    { icon: 'OC', title: 'Online Courses', description: 'Expert-led courses for personal growth' },
+    { icon: 'CS', title: 'Community Support Groups', description: 'Connect with others on similar journeys' },
+    { icon: 'PH', title: 'Professional Help', description: 'Connections to trusted mental health professionals' },
   ];
 
   return (
@@ -176,16 +176,16 @@ const Home = () => {
             <div className="relative hidden lg:block">
               <div className="relative bg-white rounded-2xl shadow-2xl p-6 border border-gray-100">
                 <div className="absolute -top-4 -right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                  🌟 Trusted by 10K+
+                  Trusted by 10K+
                 </div>
                 <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-8 text-center">
                   <div className="text-6xl mb-4">🧠</div>
                   <h3 className="text-xl font-semibold text-gray-900">Start Your Wellness Journey</h3>
                   <p className="text-gray-600 mt-2">Join thousands of users who are transforming their mental health</p>
                   <div className="mt-6 flex justify-center space-x-4 text-sm text-gray-500">
-                    <span>✅ Free to start</span>
-                    <span>✅ Premium features</span>
-                    <span>✅ Community support</span>
+                    <span>Free to start</span>
+                    <span>Premium features</span>
+                    <span>Community support</span>
                   </div>
                 </div>
                 <div className="mt-6 grid grid-cols-3 gap-4 text-center">
@@ -250,7 +250,7 @@ const Home = () => {
               <div className="grid grid-cols-2 gap-3">
                 {coreFeatures.map((feature, index) => (
                   <div key={index} className="bg-gray-50 rounded-xl p-4 hover:bg-white hover:shadow-md transition-all border border-gray-100">
-                    <div className="text-2xl mb-1">{feature.icon}</div>
+                    <div className="text-lg font-bold text-indigo-600 mb-1">{feature.icon}</div>
                     <h4 className="font-medium text-gray-900 text-sm">{feature.title}</h4>
                     <p className="text-xs text-gray-500 mt-1">{feature.description}</p>
                   </div>
