@@ -121,28 +121,79 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Professional Introduction Section - First Section After Navbar */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+      {/* Hero/Introduction Section - With Background Image and Gradient */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-4">
+        {/* Background Image with Gradient Overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src="/images/hero-background.jpg" 
+            alt="Mental Health Background" 
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/85 via-purple-700/85 to-pink-600/85"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          <div className="absolute bottom-20 left-10 w-24 h-24 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-20 right-20 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-40 right-40 w-32 h-32 bg-indigo-300/20 rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
+          {/* Main Heading */}
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Your Trusted Mental Wellness Platform
           </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          <div className="w-24 h-1 bg-white/50 mx-auto mb-8 rounded-full"></div>
           
-          <div className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-2xl p-8 md:p-10 border border-indigo-100 shadow-sm">
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              <span className="font-semibold text-indigo-600">Auravive</span> is a comprehensive, 
+          <div className="space-y-4">
+            <p className="text-lg md:text-xl text-white/95 leading-relaxed max-w-3xl mx-auto">
+              <span className="font-semibold">Auravive</span> is a comprehensive, 
               evidence-based mental wellness platform dedicated to making emotional health support 
               accessible to everyone, everywhere.
             </p>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-3xl mx-auto">
               We combine the power of artificial intelligence with human-centered design to create 
               a safe, private, and supportive environment for individuals on their mental health journey.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-3xl mx-auto">
               Our platform integrates self-reflection tools, mindfulness practices, educational resources, 
               and community connection to provide a holistic approach to mental wellness.
             </p>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => navigate('/register')}
+              className="px-8 py-3 bg-white text-indigo-700 rounded-full font-medium hover:bg-gray-100 transition-all shadow-lg"
+            >
+              Get Started Free
+            </button>
+            <button
+              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-3 bg-white/20 backdrop-blur-sm border border-white/30 text-white rounded-full font-medium hover:bg-white/30 transition-all"
+            >
+              Learn More
+            </button>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-white/80">
+            <div className="flex items-center space-x-1.5">
+              <ShieldCheckIcon className="w-4 h-4" />
+              <span>100% Private</span>
+            </div>
+            <div className="flex items-center space-x-1.5">
+              <ClockIcon className="w-4 h-4" />
+              <span>24/7 Support</span>
+            </div>
+            <div className="flex items-center space-x-1.5">
+              <StarIcon className="w-4 h-4" />
+              <span>Expert Curated</span>
+            </div>
           </div>
         </div>
       </section>
