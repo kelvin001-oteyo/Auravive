@@ -26,6 +26,14 @@ import {
 const Home = () => {
   const navigate = useNavigate();
   const [showFullAbout, setShowFullAbout] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Handle search logic here
+    console.log('Searching for:', searchQuery);
+    // You can navigate to a search results page or filter resources
+  };
 
   const features = [
     {
@@ -122,81 +130,85 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section - Updated Design */}
       <section className="relative bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-20 px-4 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl -mr-48 -mt-48"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl -ml-48 -mb-48"></div>
+        {/* Background decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl -ml-48 -mb-48"></div>
         
-        <div className="max-w-7xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-lg shadow-indigo-200">
-                <SparklesIcon className="w-4 h-4 mr-2" />
-                Your Mental Wellness Companion
+        <div className="max-w-4xl mx-auto relative text-center">
+          {/* Mental Health Tag */}
+          <div className="inline-flex items-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-medium mb-8 shadow-lg shadow-indigo-200">
+            <SparklesIcon className="w-4 h-4 mr-2" />
+            Mental Health
+          </div>
+
+          {/* Main Title */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            Mental Health
+            <br />
+            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Resources</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            Articles, videos, books & helpful resources to support your journey.
+          </p>
+
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="max-w-2xl mx-auto relative">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search resources..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-6 py-4 pl-14 bg-white border border-gray-200 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-gray-700 placeholder-gray-400"
+              />
+              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Nurture Your Mind,
-                <br />
-                <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Thrive in Life</span>
-              </h1>
-              <p className="mt-6 text-lg text-gray-600 max-w-xl">
-                Auravive is your all-in-one platform for mental wellness, mindfulness, 
-                and personal growth. Start your journey to better mental health today.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <button
-                  onClick={() => navigate('/register')}
-                  className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg shadow-indigo-200 flex items-center"
-                >
-                  Get Started Free
-                  <ArrowRightIcon className="w-4 h-4 ml-2" />
-                </button>
-                <button
-                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="px-8 py-3 bg-white text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors border border-gray-200 shadow-sm"
-                >
-                  Learn More
-                </button>
-              </div>
-              <div className="mt-8 flex flex-wrap items-center gap-6">
-                <div className="flex items-center space-x-1">
-                  <ShieldCheckIcon className="w-5 h-5 text-green-500" />
-                  <span className="text-sm text-gray-600">100% Private</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <ClockIcon className="w-5 h-5 text-indigo-500" />
-                  <span className="text-sm text-gray-600">24/7 Support</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <StarIcon className="w-5 h-5 text-yellow-500" />
-                  <span className="text-sm text-gray-600">Expert Curated</span>
-                </div>
-              </div>
+              <button 
+                type="submit"
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md"
+              >
+                Search
+              </button>
             </div>
-            <div className="relative hidden lg:block">
-              <div className="relative bg-white rounded-2xl shadow-2xl p-6 border border-gray-100">
-                <div className="absolute -top-4 -right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                  Trusted by 10K+
-                </div>
-                <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-8 text-center">
-                  <div className="text-6xl mb-4">🧠</div>
-                  <h3 className="text-xl font-semibold text-gray-900">Start Your Wellness Journey</h3>
-                  <p className="text-gray-600 mt-2">Join thousands of users who are transforming their mental health</p>
-                  <div className="mt-6 flex justify-center space-x-4 text-sm text-gray-500">
-                    <span>Free to start</span>
-                    <span>Premium features</span>
-                    <span>Community support</span>
-                  </div>
-                </div>
-                <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-                  {stats.map((stat) => (
-                    <div key={stat.label}>
-                      <p className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{stat.value}</p>
-                      <p className="text-xs text-gray-500">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          </form>
+
+          {/* Quick Action Buttons */}
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <button
+              onClick={() => navigate('/register')}
+              className="px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md flex items-center"
+            >
+              Get Started
+              <ArrowRightIcon className="w-4 h-4 ml-1.5" />
+            </button>
+            <button
+              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-6 py-2.5 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors border border-gray-200 shadow-sm"
+            >
+              Explore Resources
+            </button>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm">
+            <div className="flex items-center space-x-1.5">
+              <ShieldCheckIcon className="w-4 h-4 text-green-500" />
+              <span className="text-gray-600">Free Access</span>
+            </div>
+            <div className="flex items-center space-x-1.5">
+              <UsersIcon className="w-4 h-4 text-indigo-500" />
+              <span className="text-gray-600">10K+ Users</span>
+            </div>
+            <div className="flex items-center space-x-1.5">
+              <StarIcon className="w-4 h-4 text-yellow-500" />
+              <span className="text-gray-600">Expert Curated</span>
             </div>
           </div>
         </div>
@@ -294,7 +306,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <section id="features" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
