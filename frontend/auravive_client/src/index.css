@@ -5,20 +5,16 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
+  /* Remove the global reset that conflicts with Tailwind */
+  /* Instead, use Tailwind's preflight which handles this better */
+  
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f8fafc;
-    color: #0f172a;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Keep scrollbar styles as they don't conflict */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -46,37 +42,25 @@
 }
 
 @layer components {
-  /* Glassmorphism */
+  /* Glassmorphism - Use these instead of bg-white/backdrop classes */
   .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    @apply bg-white/70 backdrop-blur-[20px] border border-white/30;
   }
 
   .glass-dark {
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    @apply bg-slate-900/80 backdrop-blur-[20px] border border-white/10;
   }
 
-  /* Gradient Text */
+  /* Gradient Text - Use these for consistent gradients */
   .gradient-text {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;
   }
 
   .gradient-text-hero {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent;
   }
 
-  /* Animated Gradient Border */
+  /* Animated Gradient Border - Keep as is */
   .animated-border {
     position: relative;
     background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
@@ -127,56 +111,143 @@
     100% { background-position: 200% 0; }
   }
 
-  /* Card Hover Effect */
+  /* Card Hover Effect - Use this instead of custom hover classes */
   .card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(99,102,241,0.15)];
   }
 
-  .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
-  }
-
-  /* Button Gradients */
+  /* Button Styles - Now using Tailwind classes for consistency */
   .btn-primary {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary:hover {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    @apply bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium 
+           transition-all duration-300 hover:from-indigo-600 hover:to-purple-600 
+           hover:scale-[1.02] hover:shadow-[0_10px_30px_rgba(99,102,241,0.4)];
   }
 
   .btn-secondary {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-    transition: all 0.3s ease;
-  }
-
-  .btn-secondary:hover {
-    background: linear-gradient(135deg, #d97706, #b45309);
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+    @apply bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium 
+           transition-all duration-300 hover:from-amber-600 hover:to-amber-700 
+           hover:scale-[1.02] hover:shadow-[0_10px_30px_rgba(245,158,11,0.4)];
   }
 
   .btn-success {
-    background: linear-gradient(135deg, #10b981, #059669);
-    transition: all 0.3s ease;
+    @apply bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-medium 
+           transition-all duration-300 hover:from-emerald-600 hover:to-emerald-700 
+           hover:scale-[1.02] hover:shadow-[0_10px_30px_rgba(16,185,129,0.4)];
   }
 
-  .btn-success:hover {
-    background: linear-gradient(135deg, #059669, #047857);
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
-  }
-
-  /* Card Glass Effect */
+  /* Card Glass Effect - Use Tailwind classes */
   .card-glass {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    @apply bg-white/80 backdrop-blur-[10px] border border-white/30 
+           shadow-[0_8px_32px_rgba(0,0,0,0.05)];
+  }
+
+  /* Dashboard Specific Styles */
+  .dashboard-card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 
+           hover:shadow-md transition-all duration-300;
+  }
+
+  .dashboard-stat {
+    @apply flex items-center gap-3 p-4 bg-gradient-to-br from-indigo-50 to-purple-50 
+           rounded-xl border border-indigo-100;
+  }
+
+  .dashboard-stat-icon {
+    @apply w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 
+           flex items-center justify-center text-white;
+  }
+
+  /* Sidebar Styles */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 
+           hover:bg-indigo-50 hover:text-indigo-600 transition-all duration-200;
+  }
+
+  .sidebar-link-active {
+    @apply bg-indigo-50 text-indigo-600 font-medium;
+  }
+
+  /* Resource Cards */
+  .resource-card {
+    @apply bg-white rounded-xl p-6 border border-gray-100 
+           hover:shadow-lg hover:border-indigo-200 transition-all duration-300 
+           hover:-translate-y-1;
+  }
+
+  /* Search Bar */
+  .search-input {
+    @apply w-full px-6 py-3 pl-12 bg-white border border-gray-200 rounded-full 
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent 
+           transition-all text-gray-700 placeholder-gray-400;
+  }
+
+  .search-icon {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-gray-400;
+  }
+
+  .search-button {
+    @apply absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 
+           bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full 
+           font-medium hover:from-indigo-600 hover:to-purple-600 transition-all shadow-md;
+  }
+}
+
+@layer utilities {
+  /* Utility classes for common patterns */
+  .section-padding {
+    @apply py-20 px-4;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500;
+  }
+
+  .bg-gradient-secondary {
+    @apply bg-gradient-to-r from-amber-400 via-orange-400 to-red-400;
+  }
+
+  .bg-gradient-success {
+    @apply bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400;
+  }
+
+  /* Text shadows for better readability */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0,0,0,0.12);
+  }
+
+  /* Hover scale with transition */
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)];
+  }
+}
+
+/* Responsive adjustments */
+@layer base {
+  @media (max-width: 640px) {
+    .section-padding {
+      @apply py-12 px-3;
+    }
   }
 }
