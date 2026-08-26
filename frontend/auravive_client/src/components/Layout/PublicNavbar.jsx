@@ -8,30 +8,49 @@ const PublicNavbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="glass fixed top-0 left-0 right-0 z-50 border-b border-gray-200/50 dark:border-gray-700/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold gradient-text">Auravive</span>
-            <span className="hidden sm:inline text-xs bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-2 py-0.5 rounded-full">Mental Wellness</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Auravive
+            </span>
+            <span className="hidden sm:inline text-xs bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-2 py-0.5 rounded-full">
+              Mental Wellness
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/about" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+            <Link 
+              to="/about" 
+              className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium"
+            >
               About
             </Link>
-            <Link to="/services" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+            <Link 
+              to="/services" 
+              className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium"
+            >
               Services
             </Link>
-            <Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+            <Link 
+              to="/pricing" 
+              className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium"
+            >
               Pricing
             </Link>
-            <Link to="/faq" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+            <Link 
+              to="/faq" 
+              className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium"
+            >
               FAQ
             </Link>
-            <Link to="/contact" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+            <Link 
+              to="/contact" 
+              className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium"
+            >
               Contact
             </Link>
             <Link
@@ -74,15 +93,45 @@ const PublicNavbar = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden glass border-t border-gray-200/50 dark:border-gray-700/50 py-4 px-4"
+          className="md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-gray-200/50 dark:border-gray-700/50 py-4 px-4 shadow-lg"
         >
           <div className="space-y-3">
-            <Link to="/about" className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">About</Link>
-            <Link to="/services" className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Services</Link>
-            <Link to="/pricing" className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Pricing</Link>
-            <Link to="/faq" className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">FAQ</Link>
-            <Link to="/contact" className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Contact</Link>
-            <Link to="/donate" className="block text-rose-500 font-medium">❤️ Donate</Link>
+            <Link 
+              to="/about" 
+              className="block text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium"
+            >
+              About
+            </Link>
+            <Link 
+              to="/services" 
+              className="block text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium"
+            >
+              Services
+            </Link>
+            <Link 
+              to="/pricing" 
+              className="block text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium"
+            >
+              Pricing
+            </Link>
+            <Link 
+              to="/faq" 
+              className="block text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium"
+            >
+              FAQ
+            </Link>
+            <Link 
+              to="/contact" 
+              className="block text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium"
+            >
+              Contact
+            </Link>
+            <Link 
+              to="/donate" 
+              className="block text-rose-500 font-medium"
+            >
+              ❤️ Donate
+            </Link>
             <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200/50 dark:border-gray-700/50">
               <button
                 onClick={() => navigate('/login')}
