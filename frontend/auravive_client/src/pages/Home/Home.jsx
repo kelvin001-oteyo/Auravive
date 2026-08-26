@@ -125,16 +125,20 @@ const Home = () => {
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-4">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
+          {/* Background Image - Mental Health / Wellness Theme */}
           <img 
-            src="/images/hero-background.jpg" 
-            alt="Mental Health Background" 
+            src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1920&q=80" 
+            alt="Mental Health Wellness Background" 
             className="w-full h-full object-cover"
             onError={(e) => {
               e.target.style.display = 'none';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/85 via-purple-700/85 to-pink-600/85"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          {/* Gradient Overlay - Indigo to Purple to Pink */}
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/80 via-purple-700/80 to-pink-600/80"></div>
+          {/* Additional overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+          {/* Decorative floating elements */}
           <div className="absolute bottom-20 left-10 w-24 h-24 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute top-20 right-20 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
           <div className="absolute bottom-40 right-40 w-32 h-32 bg-indigo-300/20 rounded-full blur-3xl animate-pulse delay-700"></div>
