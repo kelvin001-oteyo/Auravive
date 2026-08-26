@@ -23,9 +23,6 @@ import {
   MusicalNoteIcon,
 } from '@heroicons/react/24/outline';
 
-// Optional: Import background image
-// import heroBg from '../assets/images/hero-background.jpg';
-
 const Home = () => {
   const navigate = useNavigate();
   const [showFullAbout, setShowFullAbout] = useState(false);
@@ -33,9 +30,7 @@ const Home = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Handle search logic here
     console.log('Searching for:', searchQuery);
-    // You can navigate to a search results page or filter resources
   };
 
   const features = [
@@ -113,13 +108,6 @@ const Home = () => {
     },
   ];
 
-  const stats = [
-    { label: 'Active Users', value: '10K+', icon: UsersIcon },
-    { label: 'Moods Tracked', value: '50K+', icon: ChartBarIcon },
-    { label: 'Community Posts', value: '5K+', icon: HeartIcon },
-    { label: 'Courses Completed', value: '2K+', icon: CheckCircleIcon },
-  ];
-
   const coreFeatures = [
     { icon: 'AI', title: 'AI Emotional Support', description: '24/7 AI-powered conversations for emotional wellness' },
     { icon: 'MT', title: 'Mood Tracking', description: 'Monitor and understand your emotional patterns' },
@@ -133,25 +121,20 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Updated to Match Screenshot Design with Background Image */}
+      {/* Hero Section - Updated to Match Screenshot Design */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-4">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
-          {/* Background Image */}
           <img 
             src="/images/hero-background.jpg" 
             alt="Mental Health Background" 
             className="w-full h-full object-cover"
             onError={(e) => {
-              // Fallback gradient if image doesn't load
               e.target.style.display = 'none';
             }}
           />
-          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/85 via-purple-700/85 to-pink-600/85"></div>
-          {/* Additional overlay for depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-          {/* Decorative floating elements */}
           <div className="absolute bottom-20 left-10 w-24 h-24 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute top-20 right-20 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
           <div className="absolute bottom-40 right-40 w-32 h-32 bg-indigo-300/20 rounded-full blur-3xl animate-pulse delay-700"></div>
@@ -233,8 +216,37 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Professional Introduction Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
+            Welcome to Auravive
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Your Trusted Mental Wellness Platform
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-8 rounded-full"></div>
+          
+          <div className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-2xl p-8 md:p-10 border border-indigo-100 shadow-sm">
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              <span className="font-semibold text-indigo-600">Auravive</span> is a comprehensive, 
+              evidence-based mental wellness platform dedicated to making emotional health support 
+              accessible to everyone, everywhere.
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              We combine the power of artificial intelligence with human-centered design to create 
+              a safe, private, and supportive environment for individuals on their mental health journey.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Our platform integrates self-reflection tools, mindfulness practices, educational resources, 
+              and community connection to provide a holistic approach to mental wellness.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* About / Learn More Section */}
-      <section id="about" className="py-20 px-4 bg-white">
+      <section id="about" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
@@ -289,43 +301,11 @@ const Home = () => {
               </div>
             </div>
           </div>
-
-          {/* Values Section */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <HeartIcon className="w-7 h-7 text-indigo-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900">Compassion</h4>
-              <p className="text-sm text-gray-500 mt-1">Empathy at the core of everything we do</p>
-            </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-r from-green-100 to-teal-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <ShieldCheckIcon className="w-7 h-7 text-green-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900">Privacy</h4>
-              <p className="text-sm text-gray-500 mt-1">Your data is always protected</p>
-            </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <UsersIcon className="w-7 h-7 text-yellow-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900">Inclusivity</h4>
-              <p className="text-sm text-gray-500 mt-1">For everyone, everywhere</p>
-            </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <LightBulbIcon className="w-7 h-7 text-purple-600" />
-              </div>
-              <h4 className="font-semibold text-gray-900">Innovation</h4>
-              <p className="text-sm text-gray-500 mt-1">Evidence-based practices</p>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <section id="features" className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
@@ -343,7 +323,7 @@ const Home = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group bg-white rounded-xl p-6 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-transparent hover:-translate-y-1"
+                className="group bg-gray-50 rounded-xl p-6 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-transparent hover:-translate-y-1 hover:bg-white"
               >
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
                   <feature.icon className="w-6 h-6 text-white" />
@@ -357,7 +337,7 @@ const Home = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
@@ -408,7 +388,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-medium mb-4">
@@ -419,7 +399,7 @@ const Home = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow hover:bg-white">
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="text-3xl">{testimonial.avatar}</div>
                   <div>
