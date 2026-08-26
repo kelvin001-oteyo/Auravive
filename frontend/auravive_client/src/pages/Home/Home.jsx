@@ -23,6 +23,9 @@ import {
   MusicalNoteIcon,
 } from '@heroicons/react/24/outline';
 
+// Optional: Import background image
+// import heroBg from '../assets/images/hero-background.jpg';
+
 const Home = () => {
   const navigate = useNavigate();
   const [showFullAbout, setShowFullAbout] = useState(false);
@@ -130,29 +133,46 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Updated Design */}
-      <section className="relative bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-20 px-4 overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl -ml-48 -mb-48"></div>
-        
-        <div className="max-w-4xl mx-auto relative text-center">
-          {/* Mental Health Tag */}
-          <div className="inline-flex items-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-medium mb-8 shadow-lg shadow-indigo-200">
+      {/* Hero Section - Updated to Match Screenshot Design with Background Image */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-4">
+        {/* Background Image with Gradient Overlay */}
+        <div className="absolute inset-0">
+          {/* Background Image */}
+          <img 
+            src="/images/hero-background.jpg" 
+            alt="Mental Health Background" 
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              // Fallback gradient if image doesn't load
+              e.target.style.display = 'none';
+            }}
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/85 via-purple-700/85 to-pink-600/85"></div>
+          {/* Additional overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          {/* Decorative floating elements */}
+          <div className="absolute bottom-20 left-10 w-24 h-24 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-20 right-20 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-40 right-40 w-32 h-32 bg-indigo-300/20 rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
+          {/* Badge */}
+          <div className="inline-flex items-center bg-white/20 backdrop-blur-sm border border-white/30 px-5 py-2 rounded-full text-sm font-medium mb-6 shadow-lg">
             <SparklesIcon className="w-4 h-4 mr-2" />
             Mental Health
           </div>
 
-          {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            Mental Health
-            <br />
-            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Resources</span>
+          {/* Main Heading */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-4">
+            <span className="text-white">Resources</span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Articles, videos, books & helpful resources to support your journey.
+          {/* Description */}
+          <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed">
+            Articles, videos, books &amp; helpful resources to support your journey.
           </p>
 
           {/* Search Bar */}
@@ -163,16 +183,16 @@ const Home = () => {
                 placeholder="Search resources..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 pl-14 bg-white border border-gray-200 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-gray-700 placeholder-gray-400"
+                className="w-full px-6 py-4 pl-14 bg-white/10 backdrop-blur-md border border-white/30 text-white placeholder-white/70 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all shadow-2xl"
               />
-              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-white/70">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
               <button 
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md"
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-white text-indigo-700 rounded-full font-medium hover:bg-gray-100 transition-all shadow-lg"
               >
                 Search
               </button>
@@ -180,35 +200,34 @@ const Home = () => {
           </form>
 
           {/* Quick Action Buttons */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <button
               onClick={() => navigate('/register')}
-              className="px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md flex items-center"
+              className="px-6 py-2.5 bg-white text-indigo-700 rounded-full font-medium hover:bg-gray-100 transition-all shadow-lg"
             >
-              Get Started
-              <ArrowRightIcon className="w-4 h-4 ml-1.5" />
+              Get Started Free
             </button>
             <button
               onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 py-2.5 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors border border-gray-200 shadow-sm"
+              className="px-6 py-2.5 bg-white/20 backdrop-blur-sm border border-white/30 text-white rounded-full font-medium hover:bg-white/30 transition-all"
             >
               Explore Resources
             </button>
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm">
+          <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-white/80">
             <div className="flex items-center space-x-1.5">
-              <ShieldCheckIcon className="w-4 h-4 text-green-500" />
-              <span className="text-gray-600">Free Access</span>
+              <ShieldCheckIcon className="w-4 h-4" />
+              <span>Free Access</span>
             </div>
             <div className="flex items-center space-x-1.5">
-              <UsersIcon className="w-4 h-4 text-indigo-500" />
-              <span className="text-gray-600">10K+ Users</span>
+              <UsersIcon className="w-4 h-4" />
+              <span>10K+ Users</span>
             </div>
             <div className="flex items-center space-x-1.5">
-              <StarIcon className="w-4 h-4 text-yellow-500" />
-              <span className="text-gray-600">Expert Curated</span>
+              <StarIcon className="w-4 h-4" />
+              <span>Expert Curated</span>
             </div>
           </div>
         </div>
