@@ -55,7 +55,7 @@ const Layout = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30">
         <PublicNavbar />
-        <main>
+        <main className="pt-16">
           <Outlet />
         </main>
         <Footer />
@@ -67,15 +67,17 @@ const Layout = () => {
     <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
       <div className="flex min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
         {/* Mobile Sidebar Toggle */}
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50 px-4 py-3 flex items-center justify-between">
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 px-4 py-3 flex items-center justify-between">
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-700/50 transition-colors"
           >
             <Bars3Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
           </button>
-          <Link to="/dashboard" className="text-xl font-bold gradient-text">
-            Auravive
+          <Link to="/dashboard" className="text-xl font-bold">
+            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Auravive
+            </span>
           </Link>
           <Link to="/profile" className="w-9 h-9 rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-800 dark:to-purple-800 flex items-center justify-center border-2 border-indigo-200 dark:border-indigo-600">
             <UserCircleIcon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
@@ -83,14 +85,16 @@ const Layout = () => {
         </div>
 
         {/* Sidebar */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-72 glass border-r border-gray-200/50 dark:border-gray-700/50 transform transition-transform duration-300 ease-in-out ${
+        <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-gray-200/50 dark:border-gray-700/50 transform transition-transform duration-300 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0`}>
           <div className="flex flex-col h-full">
             {/* Brand */}
             <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200/50 dark:border-gray-700/50">
               <Link to="/dashboard" className="flex items-center space-x-2">
-                <span className="text-2xl font-bold gradient-text">Auravive</span>
+                <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Auravive
+                </span>
                 <span className="text-xs bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-2 py-0.5 rounded-full">v2.0</span>
               </Link>
               <button
@@ -111,21 +115,25 @@ const Layout = () => {
                       className={({ isActive }) =>
                         `group flex items-center px-4 py-3 rounded-xl transition-all ${
                           isActive
-                            ? 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-500/30'
+                            ? 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-500/30 shadow-sm'
                             : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white'
                         }`
                       }
                       onClick={() => setSidebarOpen(false)}
                     >
-                      <item.icon className={`w-5 h-5 mr-3 transition-colors ${
-                        ({ isActive }) => isActive ? 'text-indigo-500' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300'
-                      }`} />
-                      <span className="font-medium">{item.name}</span>
-                      {({ isActive }) => isActive && (
-                        <motion.div
-                          layoutId="active-indicator"
-                          className="ml-auto w-1.5 h-8 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full"
-                        />
+                      {({ isActive }) => (
+                        <>
+                          <item.icon className={`w-5 h-5 mr-3 transition-colors ${
+                            isActive ? 'text-indigo-500' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300'
+                          }`} />
+                          <span className="font-medium">{item.name}</span>
+                          {isActive && (
+                            <motion.div
+                              layoutId="active-indicator"
+                              className="ml-auto w-1.5 h-8 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full"
+                            />
+                          )}
+                        </>
                       )}
                     </NavLink>
                   </li>
@@ -211,7 +219,7 @@ const Layout = () => {
         {/* Main Content */}
         <div className="lg:ml-72 flex-1 min-h-screen flex flex-col">
           <div className="pt-16 lg:pt-0 flex-1">
-            <main className="p-4 md:p-6 animate-fade-in">
+            <main className="p-4 md:p-6">
               <Outlet />
             </main>
           </div>
@@ -228,12 +236,14 @@ const PublicNavbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="glass fixed top-0 left-0 right-0 z-50 border-b border-gray-200/50 dark:border-gray-700/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold gradient-text">Auravive</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Auravive
+            </span>
             <span className="hidden sm:inline text-xs bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-2 py-0.5 rounded-full">Mental Wellness</span>
           </Link>
 
@@ -294,7 +304,7 @@ const PublicNavbar = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden glass border-t border-gray-200/50 dark:border-gray-700/50 py-4 px-4"
+          className="md:hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-gray-200/50 dark:border-gray-700/50 py-4 px-4"
         >
           <div className="space-y-3">
             <Link to="/about" className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">About</Link>
